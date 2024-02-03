@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,15 +22,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.hellokotlin2.Utils
 import com.example.weather_kotlin.ui.theme.WeatherKotlinTheme
 import java.sql.Time
 import java.util.Calendar
 
 class MainActivity : ComponentActivity() {
-
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContent {
@@ -53,8 +55,10 @@ fun dataList() {
 
 	var timer = object: CountDownTimer(100000000, 1000) {
 		override fun onTick(millisUntilFinished: Long) {
+			data.value.put("api", "https://api.openweathermap.org/")
 			data.value.put("time", Calendar.getInstance().time.toString())
-			data.value.put("counter", millisUntilFinished.toString())
+			data.value.put("timer.counter", millisUntilFinished.toString())
+			data.value.put("lorem.word", Utils.getRandomWord())
 		}
 
 		override fun onFinish() {
@@ -65,7 +69,7 @@ fun dataList() {
 	timer.start()
 
 
-	Box(modifier = Modifier.fillMaxSize()) {
+	Box(modifier = Modifier.fillMaxSize().padding(10.dp)) {
 		lazyList(map = data.value)
 	}
 
@@ -95,6 +99,7 @@ fun lazyList(map: SnapshotStateMap<String?, String?>) {
 						.padding(10.dp)
 				)
 			}
+			Divider(color = Color.Black, thickness = 0.5.dp)
 		}
 	}
 }
