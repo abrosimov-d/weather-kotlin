@@ -1,30 +1,31 @@
 package com.example.weather_kotlin
 
 data class Coord(
-	var lat: Float,
-	var lon: Float,
+	val lat: Float,
+	val lon: Float,
 )
 
 data class Weather(
-	var id: Int,
-	var main: String,
-	var description: String,
-	var icon: String
+	val id: Int,
+	val main: String,
+	val description: String,
+	val icon: String
 )
 
 data class Main(
-	var temp: Float,
-	var feels_like: Float,
-	var temp_min: Float
-	var temp_max: Float,
-	var pressure: Int,
-	var humidity: Int
+	val temp: Float,
+	val feels_like: Float,
+	val temp_min: Float,
+	val temp_max: Float,
+	val pressure: Int,
+	val humidity: Int
 )
 
 data class WeatherResult(
 	var coord: Coord,
-	var weather: Weather,
-	var main: Main
+	var weather: List<Weather>,
+	var main: Main,
+	var name: String
 )
 
 /*
