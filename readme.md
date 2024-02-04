@@ -1,5 +1,5 @@
 # Weather-Kotlin
-![screenshot](Screenshot_20240204_060714.png =x250)
+![screenshot](Screenshot.png)
 
 ## Описание
 Weather-Kotlin - это приложение для прогноза погоды, написанное на Kotlin. Оно предоставляет актуальную информацию о погоде для любого города в мире.
