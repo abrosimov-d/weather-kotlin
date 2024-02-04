@@ -2,8 +2,12 @@ package com.example.weather_kotlin
 
 import com.example.weather_kotlin.WeatherResult
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface WeatherApi {
-	@GET("data/2.5/weather?q=voronezh&appid=bbaa19e2761f1e488a2cf85c05f3a6f4&units=metric")
-	suspend fun getWeather(): WeatherResult
+	@GET("data/2.5/weather?units=metric")
+	suspend fun getWeather(
+		@Query("q") city: String,
+		@Query("appid") appid: String): WeatherResult
 }
