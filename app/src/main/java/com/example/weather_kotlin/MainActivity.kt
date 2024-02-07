@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateMap
@@ -71,21 +73,24 @@ fun dataList() {
 		.fillMaxSize()
 		.padding(10.dp)
 	) {
-		lazyList(map = data.value)
+		lazyList(data = data)
 	}
 }
 
 @Composable
-fun lazyList(map: SnapshotStateMap<String?, String?>) {
+fun lazyList(data: MutableState<SnapshotStateMap<String?, String?>>) {
 
 	LazyColumn(
 		modifier = Modifier
 			.fillMaxSize()
 	)
 	{
-		itemsIndexed(map.keys.toMutableList()) {
+		itemsIndexed(data.value.keys.toMutableList()) {
 				_, item ->
-			Row(modifier = Modifier.fillMaxWidth(),
+			Row(modifier = Modifier.fillMaxWidth()
+				.clickable (onClick = ({
+					Log.d("hk", "")
+				})),
 				horizontalArrangement = Arrangement.SpaceBetween,) {
 				Text(text = "$item"!!,
 					modifier = Modifier
@@ -94,7 +99,7 @@ fun lazyList(map: SnapshotStateMap<String?, String?>) {
 
 					)
 				Text(fontSize = 16.sp,
-					text = map.get(item)!!,
+					text = data.value.get(item)!!,
 					modifier = Modifier
 						.padding(10.dp)
 				)
